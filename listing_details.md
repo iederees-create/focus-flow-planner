@@ -6,7 +6,7 @@ Use these optimized details in your Etsy Shop Manager to significantly boost lis
 
 ## 🏷️ Listing Title
 ```text
-Minimalist Daily Planner Printable A4 PDF — Focus Flow Productivity Template with Offline-Ready PWA Companion App & Pomodoro Focus Timer — Fillable Daily To Do List, Time Blocking, Wellness Tracker & Auto-Save
+Focus Flow Daily Planner A4 PDF with Offline Companion App and Pomodoro Timer | Fillable Daily To Do List and Time Blocking Template
 ```
 
 ---
@@ -46,8 +46,11 @@ Most digital planners are passive. The Focus Flow Companion App is active, respo
 4. Auto-Save Local Storage: No logins, no database setup, and absolute privacy. Everything you type is automatically saved locally to your browser. Your data stays 100% yours.
 5. Custom Export & A4 Printing: Type your goals on your desktop or laptop, then click "Export A4 PDF". The app's custom printing styles automatically hide buttons, sidebars, and timers, rendering your inputs onto a clean, print-perfect A4 sheet to print or save.
 6. 7-Day Performance Insights: Slide out the insights bar to see your priority completion rates, average daily hydration logs, and dominant energy levels compiled over the last 7 days of logs.
-7. Elegant Premium UI: No ugly default system alert popups! All notifications, reset confirmations, and settings are handled via custom, gorgeous glassmorphic modals.
+7. Elegant Premium UI: No ugly default system alert popups! All notifications, reset confirmations, and settings are handled via custom, gorgeous glassmorphic modals in a sleek Slate/Indigo theme.
 8. Dynamic Locale Support: Date headers automatically format based on your native browser's locale settings.
+9. Interactive "Flow Coach" AI Assistant: A built-in productivity coach at your side!
+   - Offline Local Mode (100% Free): Works out of the box with zero keys or setup needed. Asks questions, suggests schedules, and offers motivation.
+   - Pro Custom Mode: Paste your own OpenAI API key to unlock fully personalized GPT conversations. (Extremely cost-effective: utilizes OpenAI's fast gpt-4o-mini model, meaning 1,000 queries cost less than $0.05! A one-time $5.00 credit will last you over a year of active daily planning).
 
 📦 WHAT'S INCLUDED IN YOUR DOWNLOAD:
 * Focus Flow Web Companion App: Clean HTML, CSS, and JS files, complete with Service Worker (sw.js) for full offline caching and manifest.json for app installation.
@@ -68,5 +71,5 @@ Most digital planners are passive. The Focus Flow Companion App is active, respo
 
 ## 🔍 SEO Search Tags
 ```text
-Minimalist Planner, Daily To Do List, Time Blocking PDF, Pomodoro Timer App, Printable Daily Planner, Fillable Daily PDF, Productivity Tracker, iPad Planner, Focus Flow Sheet, GoodNotes Template, Web Companion App, Offline PWA Planner, Self Care Log, Hydration Tracker, Aesthetic Dashboard
+Daily Planner, Minimalist Planner, To Do List, Time Blocking PDF, Pomodoro Timer, Printable Planner, Fillable Daily PDF, Productivity Tracker, GoodNotes Template, Web Companion App, Offline PWA Planner, Self Care Log, Hydration Tracker
 ```
