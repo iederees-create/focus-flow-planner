@@ -609,6 +609,224 @@ document.addEventListener('DOMContentLoaded', () => {
     avgMoodStars.textContent = `${moodDescr} (${avgMood} / 5.0)`;
   }
 
+  // --- AI CHATBOT ASSISTANT LOGIC ---
+  const chatbotTrigger = document.getElementById('chatbot-trigger');
+  const chatbotWindow = document.getElementById('chatbot-window');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatInput = document.getElementById('chat-input');
+  const chatSendBtn = document.getElementById('chat-send-btn');
+  const chatCloseBtn = document.getElementById('chat-close-btn');
+  const chatSettingsBtn = document.getElementById('chat-settings-btn');
+  const chatSettingsPanel = document.getElementById('chat-settings');
+  const openaiApiKeyInput = document.getElementById('openai-api-key');
+  const saveApiKeyBtn = document.getElementById('save-api-key-btn');
+  const backToChatBtn = document.getElementById('back-to-chat-btn');
+  const promptChips = document.querySelectorAll('.prompt-chip');
+  const triggerDot = chatbotTrigger.querySelector('.trigger-dot');
+
+  // Toggle chatbot window
+  chatbotTrigger.addEventListener('click', () => {
+    chatbotWindow.classList.toggle('hidden');
+    if (!chatbotWindow.classList.contains('hidden')) {
+      chatInput.focus();
+      triggerDot.classList.add('hidden'); // Clear notifications
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  });
+
+  chatCloseBtn.addEventListener('click', () => {
+    chatbotWindow.classList.add('hidden');
+  });
+
+  // Toggle settings panel
+  chatSettingsBtn.addEventListener('click', () => {
+    chatSettingsPanel.classList.toggle('hidden');
+  });
+
+  backToChatBtn.addEventListener('click', () => {
+    chatSettingsPanel.classList.add('hidden');
+  });
+
+  // Load API Key from local storage
+  let savedApiKey = localStorage.getItem('focusflow_openai_key') || '';
+  if (savedApiKey) {
+    openaiApiKeyInput.value = savedApiKey;
+  }
+
+  // Save API Key
+  saveApiKeyBtn.addEventListener('click', () => {
+    savedApiKey = openaiApiKeyInput.value.trim();
+    localStorage.setItem('focusflow_openai_key', savedApiKey);
+    showCustomAlert("Settings Saved!", "Your OpenAI API key has been stored locally and securely in this browser session.", () => {
+      chatSettingsPanel.classList.add('hidden');
+    });
+  });
+
+  // Send Message function
+  function sendChatMessage(text) {
+    const messageText = text || chatInput.value.trim();
+    if (!messageText) return;
+
+    if (!text) {
+      chatInput.value = '';
+    }
+
+    // Append user message
+    appendMessage('user', messageText);
+
+    // Show typing indicator
+    showTypingIndicator();
+
+    // Generate AI response (local or API-based)
+    if (savedApiKey) {
+      fetchOpenAIResponse(messageText);
+    } else {
+      setTimeout(() => {
+        const reply = generateLocalResponse(messageText);
+        removeTypingIndicator();
+        appendMessage('assistant', reply);
+      }, 900);
+    }
+  }
+
+  chatSendBtn.addEventListener('click', () => sendChatMessage());
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      sendChatMessage();
+    }
+  });
+
+  // Prompt suggestion chips click
+  promptChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const prompt = chip.dataset.prompt;
+      sendChatMessage(prompt);
+    });
+  });
+
+  // Helper: Append Message
+  function appendMessage(sender, text) {
+    const msgElement = document.createElement('div');
+    msgElement.className = `chat-msg ${sender}`;
+    
+    // Simple markdown-to-HTML parser (handles bold **, lists, emoji, newlines)
+    let parsedText = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+
+    msgElement.innerHTML = `<div class="msg-content">${parsedText}</div>`;
+    chatMessages.appendChild(msgElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Helper: Typing Indicator
+  function showTypingIndicator() {
+    removeTypingIndicator(); // Safeguard
+    const indicator = document.createElement('div');
+    indicator.className = 'chat-msg assistant typing';
+    indicator.id = 'typing-indicator';
+    indicator.innerHTML = `
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+    `;
+    chatMessages.appendChild(indicator);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('typing-indicator');
+    if (indicator) {
+      indicator.remove();
+    }
+  }
+
+  // Local rule-based NLP parser
+  function generateLocalResponse(msg) {
+    const lower = msg.toLowerCase();
+    
+    if (lower.includes('plan') || lower.includes('morning') || lower.includes('afternoon') || lower.includes('schedule') || lower.includes('block')) {
+      return "I recommend dividing your schedule into three core focus blocks today:\n\n1. **Morning Focus (8 AM - 12 PM)**: Allocate this block to your absolute Top 1 priority when your mental battery is fresh.\n2. **Collaboration & Admin (1 PM - 4 PM)**: Handle emails, meetings, and secondary tasks.\n3. **Rest & Review (4 PM onwards)**: Fill in your evening reflection, review your daily wins, and rest.\n\nWould you like me to suggest specific time blocks for your tasks?";
+    }
+    
+    if (lower.includes('pomodoro') || lower.includes('focus') || lower.includes('timer') || lower.includes('interval')) {
+      return "The standard Pomodoro cycle is **25 minutes of deep focus followed by a 5-minute break**. After 4 cycles, take a longer 15-minute break. This technique prevents cognitive fatigue.\n\nIn the companion app's Pomodoro widget, you can toggle between 'Focus', 'Short', and 'Long' break modes to track this automatically.";
+    }
+    
+    if (lower.includes('priority') || lower.includes('goals') || lower.includes('tasks') || lower.includes('prioritize')) {
+      return "To optimize your priorities:\n\n1. Write down everything you need to do.\n2. Select **only one** task that is absolutely critical—make this your Priority 1.\n3. Select two secondary tasks as Priority 2 and 3.\n\nIf you finish only Priority 1 today, your day is still a major success! What is your main target today?";
+    }
+    
+    if (lower.includes('motivation') || lower.includes('motivate') || lower.includes('lazy') || lower.includes('tired') || lower.includes('sluggish')) {
+      return "Remember: *'Focus is not about forcing energy, but channeling intention.'* Take a deep breath, drink a glass of water, and commit to working on your Top 1 priority for just **5 minutes**. Usually, starting is the hardest part. Once you take that first step, momentum will take over!";
+    }
+    
+    if (lower.includes('water') || lower.includes('hydration') || lower.includes('drink') || lower.includes('health') || lower.includes('wellness')) {
+      return "Hydration directly impacts focus and brain performance. Aim for at least **8 glasses (2 liters)** of water daily. You can track your progress by clicking the water glasses in Section 03 of your planner page! Have you had water in the last hour?";
+    }
+    
+    if (lower.includes('reflect') || lower.includes('evening') || lower.includes('wins') || lower.includes('gratitude')) {
+      return "Evening reflection helps clear your cognitive load. Take 3 minutes to log your Daily Wins and list what you are grateful for today. Writing this down reinforces positive neural pathways and preps your brain for a restful sleep.";
+    }
+    
+    return "I'd love to help you stay productive! You can ask me how to structure your morning, how the Pomodoro timer works, how to choose your Top 3 priorities, or how to maintain a healthy work-life balance today. What are you working on right now?";
+  }
+
+  // Fetch response from OpenAI
+  function fetchOpenAIResponse(promptText) {
+    const messagesArray = [
+      {
+        role: "system",
+        content: "You are Flow Coach, a premium, minimalist AI productivity assistant for the Focus Flow Daily Planner app. Help the user plan their day, structure A4 schedule time blocks, set top 3 priorities, recommend wellness choices (hydration, diet, movement), and stay motivated. Keep your responses highly actionable, structured, encouraging, and relatively concise. Do not talk about coding or unrelated topics unless asked. Embody a professional, premium tone."
+      },
+      {
+        role: "user",
+        content: promptText
+      }
+    ];
+
+    fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${savedApiKey}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini", // Cost-effective and fast model
+        messages: messagesArray,
+        temperature: 0.7
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("OpenAI API response error");
+      }
+      return response.json();
+    })
+    .then(data => {
+      removeTypingIndicator();
+      const reply = data.choices[0].message.content;
+      appendMessage('assistant', reply);
+    })
+    .catch(err => {
+      console.error("OpenAI API Error, falling back to offline mode:", err);
+      removeTypingIndicator();
+      const localReply = generateLocalResponse(promptText);
+      appendMessage('assistant', `*(API Error: falling back to offline mode)*\n\n${localReply}`);
+    });
+  }
+
+  // Show notification dot on trigger after 4 seconds to guide user
+  setTimeout(() => {
+    if (chatbotWindow.classList.contains('hidden')) {
+      triggerDot.classList.remove('hidden');
+    }
+  }, 4000);
+
   // Start application
   init();
 });
+
