@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Flow — Premium Daily Planner & Productivity Ecosystem</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header no-print">
+      <div class="header-logo">
+        <span class="logo-accent">focus</span>flow
+      </div>
+      <div class="header-actions">
+        <!-- Date Selector -->
+        <div class="date-picker-wrapper">
+          <button id="prev-day-btn" class="icon-btn" title="Previous Day"><i data-lucide="chevron-left"></i></button>
+          <div class="current-date-display">
+            <i data-lucide="calendar" class="calendar-icon"></i>
+            <span id="date-label">Sunday, 14 June</span>
+            <input type="date" id="hidden-date-picker" class="hidden-date-input">
+          </div>
+          <button id="next-day-btn" class="icon-btn" title="Next Day"><i data-lucide="chevron-right"></i></button>
+        </div>
+
+        <button id="print-btn" class="btn btn-primary" title="Print/Export A4 PDF">
+          <i data-lucide="printer"></i> <span>Export A4 PDF</span>
+        </button>
+        <button id="reset-btn" class="btn btn-secondary" title="Reset current day's planner">
+          <i data-lucide="rotate-ccw"></i> <span>Reset Day</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="planner-grid">
+      
+      <!-- LEFT COLUMN: TIME BLOCKER & TIMER -->
+      <section class="left-column">
+        <!-- Pomodoro Timer Widget -->
+        <div class="card timer-card no-print">
+          <div class="timer-tabs">
+            <button class="timer-tab active" data-mode="focus">Focus (25m)</button>
+            <button class="timer-tab" data-mode="short">Short Break (5m)</button>
+            <button class="timer-tab" data-mode="long">Long Break (15m)</button>
+          </div>
+          <div class="timer-display-wrapper">
+            <svg class="progress-ring" width="160" height="160">
+              <circle class="progress-ring-bg" stroke="#E8E3D9" stroke-width="6" fill="transparent" r="72" cx="80" cy="80"/>
+              <circle class="progress-ring-circle" stroke="#C5A880" stroke-width="6" fill="transparent" r="72" cx="80" cy="80"/>
+            </svg>
+            <div id="timer-numbers" class="timer-numbers">25:00</div>
+          </div>
+          <div class="timer-controls">
+            <button id="timer-toggle-btn" class="btn btn-primary btn-round" title="Start Timer">
+              <i data-lucide="play" id="play-icon"></i>
+              <i data-lucide="pause" id="pause-icon" class="hidden"></i>
+            </button>
+            <button id="timer-reset-btn" class="btn btn-secondary btn-round" title="Reset Timer">
+              <i data-lucide="square"></i>
+            </button>
+          </div>
+          <div class="timer-footer">
+            <span id="timer-task-label">Time to focus!</span>
+          </div>
+        </div>
+
+        <!-- Interactive Time Blocker -->
+        <div class="card scheduler-card">
+          <h2 class="card-title font-serif">
+            Time <span class="italic font-light">Blocking</span>
+            <span class="card-subtitle no-print">Schedule your day in visual blocks</span>
+          </h2>
+          <div class="time-block-list">
+            <!-- Time slots from 06:00 to 22:00 -->
+            <!-- Generated dynamically via JS to keep index.html clean, with fallback containers -->
+            <div id="time-slots-container"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: MINIMALIST A4 DAILY PLANNER SHEET -->
+      <section class="right-column planner-sheet">
+        <!-- Watermark Header for Print -->
+        <div class="print-only-header">
+          <div class="print-title">focus flow daily planner</div>
+          <div id="print-date" class="print-date">Sunday, 14 June</div>
+        </div>
+
+        <!-- 1. Morning Intention / Word -->
+        <div class="planner-section focus-word-section">
+          <label class="section-label">01 / Focus Word & Intention</label>
+          <input type="text" id="focus-word-input" class="planner-input focus-input font-serif" placeholder="Write your single focus word or core intention for today...">
+        </div>
+
+        <!-- 2. Top 3 Priorities -->
+        <div class="planner-section priorities-section">
+          <label class="section-label">02 / Today's Top Priorities</label>
+          <div class="priorities-list">
+            <div class="priority-item">
+              <div class="priority-checkbox" data-index="0"></div>
+              <input type="text" class="priority-input planner-input" data-index="0" placeholder="Priority 1: Most critical task today">
+            </div>
+            <div class="priority-item">
+              <div class="priority-checkbox" data-index="1"></div>
+              <input type="text" class="priority-input planner-input" data-index="1" placeholder="Priority 2: Secondary important goal">
+            </div>
+            <div class="priority-item">
+              <div class="priority-checkbox" data-index="2"></div>
+              <input type="text" class="priority-input planner-input" data-index="2" placeholder="Priority 3: Third key focus to finish">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Wellness Check -->
+        <div class="planner-section wellness-section">
+          <label class="section-label">03 / Wellness & Mindfulness</label>
+          <div class="wellness-grid">
+            <!-- Mood Slider -->
+            <div class="wellness-card">
+              <span class="wellness-label">Menergy & Mood</span>
+              <div class="mood-selector">
+                <button class="mood-btn" data-mood="1" title="Low Energy/Low Mood">😔</button>
+                <button class="mood-btn" data-mood="2" title="Tired/Neutral">😐</button>
+                <button class="mood-btn active" data-mood="3" title="Focused/Good">🙂</button>
+                <button class="mood-btn" data-mood="4" title="Inspired/Strong">✨</button>
+                <button class="mood-btn" data-mood="5" title="Peak Flow">🔥</button>
+              </div>
+            </div>
+
+            <!-- Hydration Tracker -->
+            <div class="wellness-card">
+              <span class="wellness-label">Hydration Log</span>
+              <div class="water-tracker">
+                <div class="water-glass" data-glass="1"></div>
+                <div class="water-glass" data-glass="2"></div>
+                <div class="water-glass" data-glass="3"></div>
+                <div class="water-glass" data-glass="4"></div>
+                <div class="water-glass" data-glass="5"></div>
+                <div class="water-glass" data-glass="6"></div>
+                <div class="water-glass" data-glass="7"></div>
+                <div class="water-glass" data-glass="8"></div>
+              </div>
+              <span class="water-count-sub text-xs text-amore-charcoal/50 font-light">Target: 8 Glasses (2L)</span>
+            </div>
+          </div>
+
+          <!-- Diet & Body log -->
+          <div class="diet-movement-grid">
+            <div class="diet-log">
+              <span class="wellness-label">Meal Tracking</span>
+              <div class="diet-inputs">
+                <input type="text" id="breakfast-input" class="planner-input text-xs" placeholder="Breakfast details">
+                <input type="text" id="lunch-input" class="planner-input text-xs" placeholder="Lunch details">
+                <input type="text" id="dinner-input" class="planner-input text-xs" placeholder="Dinner details">
+              </div>
+            </div>
+            <div class="movement-log">
+              <span class="wellness-label">Movement & Sleep</span>
+              <div class="movement-inputs">
+                <input type="text" id="exercise-input" class="planner-input text-xs" placeholder="Workout: duration & type">
+                <input type="text" id="sleep-input" class="planner-input text-xs" placeholder="Sleep hours & quality">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Evening Reflection & Gratitude -->
+        <div class="planner-section reflection-section">
+          <label class="section-label">04 / Evening Reflection</label>
+          <div class="reflection-inputs">
+            <div class="reflection-group">
+              <span class="reflection-subheader">What went well today? (Daily Wins)</span>
+              <textarea id="wins-input" class="planner-textarea" rows="2" placeholder="Reflect on 2-3 positive events, achievements, or moments of flow..."></textarea>
+            </div>
+            <div class="reflection-group">
+              <span class="reflection-subheader">I am grateful for...</span>
+              <textarea id="gratitude-input" class="planner-textarea" rows="2" placeholder="List who or what you are thankful for today..."></textarea>
+            </div>
+            <div class="reflection-group">
+              <span class="reflection-subheader">What is tomorrow's absolute focus?</span>
+              <textarea id="tomorrow-focus-input" class="planner-textarea" rows="2" placeholder="Clear the mental slate. Define your top target for tomorrow..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Floating Stats / Insights Sidebar -->
+    <div id="insights-sidebar" class="insights-sidebar no-print">
+      <button id="sidebar-toggle" class="sidebar-toggle-btn" title="View Weekly Trends">
+        <i data-lucide="bar-chart-2"></i>
+      </button>
+      <div class="sidebar-content">
+        <h3 class="font-serif sidebar-title">Weekly <span class="italic font-light">Insights</span></h3>
+        <p class="text-xs text-amore-charcoal/60 font-light mb-6">Local metrics aggregated from the last 7 days of logs.</p>
+        
+        <div class="stat-group">
+          <span class="stat-label">Priority Completion Rate</span>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar-fill" id="completion-bar" style="width: 0%"></div>
+          </div>
+          <span class="stat-val" id="completion-rate-text">0%</span>
+        </div>
+
+        <div class="stat-group">
+          <span class="stat-label">Average Daily Hydration</span>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar-fill" id="hydration-bar" style="width: 0%"></div>
+          </div>
+          <span class="stat-val" id="avg-hydration-text">0 / 8 Glasses</span>
+        </div>
+
+        <div class="stat-group">
+          <span class="stat-label">Dominant Energy Level</span>
+          <div class="energy-average-stars" id="avg-mood-stars">
+            Neutral (3.0/5.0)
+          </div>
+        </div>
+
+        <div class="sidebar-tip">
+          <i data-lucide="sparkles" class="tip-icon"></i>
+          <p class="text-[11px] font-light leading-relaxed">
+            *Tip*: Set a time block for "Deep Focus" in the morning. Completing your Top 1 priority before noon raises daily success rates by 70%.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio buzzer for Timer -->
+  <audio id="timer-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-500.wav" preload="auto"></audio>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
