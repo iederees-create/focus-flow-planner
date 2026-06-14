@@ -11,6 +11,7 @@
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div class="app-container">
@@ -239,6 +240,32 @@
 
   <!-- Audio buzzer for Timer -->
   <audio id="timer-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-500.wav" preload="auto"></audio>
+
+  <!-- Custom Premium Modals -->
+  <!-- 1. Reset Confirmation Modal -->
+  <div id="modal-confirm" class="modal-overlay hidden no-print">
+    <div class="modal-card">
+      <div class="modal-icon"><i data-lucide="alert-triangle"></i></div>
+      <h3 class="font-serif">Clear Daily Log?</h3>
+      <p>This will permanently erase all tasks, schedules, and metrics recorded for this day. This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button id="modal-confirm-cancel" class="btn btn-secondary">Cancel</button>
+        <button id="modal-confirm-proceed" class="btn btn-primary btn-danger">Clear Log</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Pomodoro Done Toast Modal -->
+  <div id="modal-alert" class="modal-overlay hidden no-print">
+    <div class="modal-card">
+      <div class="modal-icon alert-gold"><i data-lucide="sparkles"></i></div>
+      <h3 class="font-serif" id="modal-alert-title">Timer Complete!</h3>
+      <p id="modal-alert-message">Great job staying focused. Take a moment to breathe and rest.</p>
+      <div class="modal-actions">
+        <button id="modal-alert-close" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
   <script>
