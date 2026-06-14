@@ -267,7 +267,76 @@
     </div>
   </div>
 
+  <!-- AI Chatbot Assistant -->
+  <div id="chatbot-container" class="chatbot-container no-print">
+    <!-- Chat Trigger Button -->
+    <button id="chatbot-trigger" class="chatbot-trigger" title="Focus Flow AI Assistant">
+      <i data-lucide="message-square-text"></i>
+      <span class="trigger-dot hidden"></span>
+    </button>
+
+    <!-- Chat Window Widget -->
+    <div id="chatbot-window" class="chatbot-window hidden">
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar"><i data-lucide="sparkles"></i></div>
+          <div>
+            <h4>Flow Coach</h4>
+            <span class="chat-status">AI Assistant</span>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button id="chat-settings-btn" class="icon-btn" title="AI Settings"><i data-lucide="settings"></i></button>
+          <button id="chat-close-btn" class="icon-btn" title="Close"><i data-lucide="x"></i></button>
+        </div>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div id="chat-messages" class="chat-messages">
+        <!-- Welcoming message -->
+        <div class="chat-msg assistant">
+          <div class="msg-content">
+            Hello! I am your **Focus Flow AI Assistant**. 🌟 I'm here to help you structure your schedule, outline goals, suggest focus blocks, or answer any productivity questions!
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Prompt Suggestions -->
+      <div class="chat-suggestions">
+        <button class="prompt-chip" data-prompt="Plan my morning blocks">Plan my morning</button>
+        <button class="prompt-chip" data-prompt="Suggest a Pomodoro cycle">Pomodoro cycles</button>
+        <button class="prompt-chip" data-prompt="Give me a quick motivation boost">Get motivated</button>
+        <button class="prompt-chip" data-prompt="How to prioritize my top 3 tasks?">Prioritization tip</button>
+      </div>
+
+      <!-- Settings Panel (Hidden by default) -->
+      <div id="chat-settings" class="chat-settings hidden">
+        <h5>AI Assistant Settings</h5>
+        <p>By default, Flow Coach uses local offline intelligence. Connect your own OpenAI API key to unlock fully custom AI conversations!</p>
+        <div class="settings-field">
+          <label for="openai-api-key">OpenAI API Key</label>
+          <div class="api-key-input-wrapper">
+            <input type="password" id="openai-api-key" placeholder="sk-...">
+            <button id="save-api-key-btn" class="btn btn-primary btn-xs">Save</button>
+          </div>
+          <span class="field-note">Saved locally & securely in your browser.</span>
+        </div>
+        <button id="back-to-chat-btn" class="btn btn-secondary btn-full btn-xs" style="margin-top: 15px;">Back to Chat</button>
+      </div>
+
+      <!-- Chat Input Area -->
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Ask Flow Coach anything...">
+        <button id="chat-send-btn" class="chat-send-btn" title="Send Message">
+          <i data-lucide="send"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
+
   <script>
     // Initialize Lucide icons
     lucide.createIcons();
