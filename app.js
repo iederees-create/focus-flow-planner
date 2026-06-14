@@ -1,6 +1,11 @@
-/* ==========================================================================
-   Focus Flow — Application Logic
-   ========================================================================== */
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then((reg) => console.log('[Service Worker] Registered successfully:', reg.scope))
+      .catch((err) => console.error('[Service Worker] Registration failed:', err));
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // --- STATE VARIABLES ---
@@ -10,6 +15,49 @@ document.addEventListener('DOMContentLoaded', () => {
   let timerDuration = 1500;
   let timerIsRunning = false;
   let timerMode = 'focus'; // 'focus', 'short', 'long'
+
+  // --- CUSTOM PREMIUM MODALS HELPERS ---
+  function showCustomAlert(title, message, onCloseCallback) {
+    const alertModal = document.getElementById('modal-alert');
+    document.getElementById('modal-alert-title').textContent = title;
+    document.getElementById('modal-alert-message').textContent = message;
+    
+    const closeBtn = document.getElementById('modal-alert-close');
+    const handleClose = () => {
+      alertModal.classList.add('hidden');
+      closeBtn.removeEventListener('click', handleClose);
+      if (onCloseCallback) onCloseCallback();
+    };
+    
+    closeBtn.addEventListener('click', handleClose);
+    alertModal.classList.remove('hidden');
+  }
+
+  function showCustomConfirm(onProceed) {
+    const confirmModal = document.getElementById('modal-confirm');
+    const cancelBtn = document.getElementById('modal-confirm-cancel');
+    const proceedBtn = document.getElementById('modal-confirm-proceed');
+    
+    const handleCancel = () => {
+      confirmModal.classList.add('hidden');
+      cleanup();
+    };
+    
+    const handleProceed = () => {
+      confirmModal.classList.add('hidden');
+      cleanup();
+      if (onProceed) onProceed();
+    };
+    
+    const cleanup = () => {
+      cancelBtn.removeEventListener('click', handleCancel);
+      proceedBtn.removeEventListener('click', handleProceed);
+    };
+    
+    cancelBtn.addEventListener('click', handleCancel);
+    proceedBtn.addEventListener('click', handleProceed);
+    confirmModal.classList.remove('hidden');
+  }
 
   // --- TIME BLOCKS CONFIG ---
   const TIME_SLOTS = [
@@ -111,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateDateDisplay() {
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-    const formatted = currentDate.toLocaleDateString('en-US', options);
+    const formatted = currentDate.toLocaleDateString(navigator.language || 'en-US', options);
     dateLabel.textContent = formatted;
     printDateLabel.textContent = formatted;
     hiddenDatePicker.value = formatDateString(currentDate);
@@ -298,12 +346,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset current day's fields
     resetBtn.addEventListener('click', () => {
-      if (confirm("Are you sure you want to clear the planner for this day?")) {
+      showCustomConfirm(() => {
         const key = getStorageKey();
         localStorage.removeItem(key);
         loadDayData();
         updateInsights();
-      }
+      });
     });
 
     // Print / Export
@@ -454,11 +502,17 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Auto alert / Switch modes
         if (timerMode === 'focus') {
-          alert("Great job focusing! Time for a well-deserved short break.");
-          setTimerMode('short');
+          showCustomAlert(
+            "Focus Session Complete!", 
+            "Excellent job staying on task. Take 5 minutes to stretch, hydrate, and relax.",
+            () => { setTimerMode('short'); }
+          );
         } else {
-          alert("Break is over! Let's get back in flow.");
-          setTimerMode('focus');
+          showCustomAlert(
+            "Break Complete!", 
+            "Ready to dive back into deep work? Let's start the next session.",
+            () => { setTimerMode('focus'); }
+          );
         }
       } else {
         updateTimerDisplay();
