@@ -1,65 +1,72 @@
 # Upgraded Etsy Product Listing: Focus Flow Premium Productivity Ecosystem
 
-Use these optimized details in your Etsy Shop Manager to significantly boost listings visibility and conversion rates.
+Use these optimized details in your Etsy Shop Manager to significantly boost listing visibility and conversion rates.
 
 ---
 
 ## 🏷️ Listing Title
-Minimalist Daily Planner Printable A4 PDF — Focus Flow Productivity Template with Interactive Web Companion App & Built-in Pomodoro Timer — Fillable Daily To Do List, Time Blocking, Wellness Tracker & Local Storage Auto-Save
+```text
+Minimalist Daily Planner Printable A4 PDF — Focus Flow Productivity Template with Offline-Ready PWA Companion App & Pomodoro Focus Timer — Fillable Daily To Do List, Time Blocking, Wellness Tracker & Auto-Save
+```
 
 ---
 
 ## 📂 Category
+```text
 Paper & Party Supplies > Paper > Stationery > Design & Templates > Templates > Planner Templates
+```
 
 ---
 
 ## 💰 Pricing & Delivery
-*   **Target Price**: $12.00 - $18.00 (or equivalent in regional currency)
+*   **Target Price**: $14.99 - $19.99 (Premium Pricing Tier due to custom software companion)
 *   **Type of Item**: Digital Files
-*   **Delivery Package**: Zip archive (`Focus_Flow_Productivity_Bundle.zip`) containing:
+*   **Delivery Package**: Zip archive (`Focus_Flow_Daily_Planner_Ecosystem_Bundle.zip`) containing:
     1. `FocusFlow_DailyPlanner_Printable_NextGenWebs.pdf` (High-res A4 Printable)
     2. `FocusFlow_DailyPlanner_Fillable_NextGenWebs.pdf` (Fillable A4 PDF)
-    3. `Focus_Flow_Daily_Planner_Mini_Usage_Guidenextgenwebs.pdf` (Instructions Guide)
+    3. `Focus_Flow_Daily_Planner_Mini_Usage_Guidenextgenwebs.pdf` (Usage & setup manual)
     4. `Focus_Flow_Daily_Planner_Thank_you_Card.pdf`
     5. `Focus_Flow_Daily_Planner_BonusQuote.pdf`
-    6. `focus-flow-web-app/` folder (The fully interactive web companion app - `index.html`, `style.css`, `app.js`, `README.md`)
+    6. `focus-flow-web-app/` folder (The offline PWA app code - `index.html`, `style.css`, `app.js`, `manifest.json`, `sw.js`, `icon.png`, `README.md`)
 
 ---
 
 ## 📝 Listing Description
 
-Unlock the ultimate productivity system with the **Focus Flow Daily Planner & Interactive Web Companion App**. 
+```text
+Unlock the ultimate productivity system with the Focus Flow Daily Planner & Premium Web Companion App. 
 
-Unlike simple static planners, Focus Flow is a complete, high-fidelity productivity ecosystem. You get beautiful, minimalist A4 printable/fillable PDF files for your tablet or binder, **PLUS** a fully interactive web companion dashboard that opens right in your browser with no installation needed.
+Unlike simple static planners, Focus Flow is a complete, high-fidelity productivity ecosystem. You get beautiful, minimalist A4 printable/fillable PDF files for your tablet or binder, PLUS a fully offline-ready Progressive Web App (PWA) companion dashboard that you can install directly onto your phone, tablet, or desktop with a single click.
 
-### 🌟 WHAT MAKES THIS SYSTEM UNIQUE?
-Most digital planners are passive. The Focus Flow Companion App is active and responsive:
-1. **Built-in Pomodoro Focus Timer**: Keep track of your deep work sessions (25m Focus / 5m Break / 15m Long Break) directly on the screen with circular visual progress and buzzer notifications.
-2. **Interactive Time Blocker**: Schedule your hours (6:00 AM - 10:00 PM) with custom inputs and click-to-assign category colors (Work, Self-Care, Health, Focus, Exercise) to keep your days balanced.
-3. **Auto-Save Local Storage**: No logins, no database setup, and absolute privacy. Everything you type is automatically saved locally to your browser. Your data stays 100% yours.
-4. **Custom Export / Print CSS**: Type your goals on your desktop or laptop, then click "Export A4 PDF". The app's print system automatically hides buttons and timers, rendering your inputs onto a clean A4 sheet to print or save.
-5. **Weekly Insights Sidebar**: Sliding panel that aggregates completion rates, average water intake, and energy levels over the last 7 days.
+🌟 WHAT MAKES THIS SYSTEM UNIQUE?
+Most digital planners are passive. The Focus Flow Companion App is active, responsive, and works 100% offline:
+1. Installable PWA Support: Add the app directly to your device home screen or computer dock. No app store or complex setups required!
+2. Built-in Pomodoro Focus Timer: Track deep work sessions (25m Focus / 5m Break / 15m Long Break) directly on the screen with circular visual progress rings, premium alert chimes, and browser tab countdowns.
+3. Interactive Time Blocker: Schedule your day (6:00 AM - 10:00 PM) with custom inputs and click-to-assign categories (Work, Self-Care, Health, Focus, Exercise) to keep your schedule balanced.
+4. Auto-Save Local Storage: No logins, no database setup, and absolute privacy. Everything you type is automatically saved locally to your browser. Your data stays 100% yours.
+5. Custom Export & A4 Printing: Type your goals on your desktop or laptop, then click "Export A4 PDF". The app's custom printing styles automatically hide buttons, sidebars, and timers, rendering your inputs onto a clean, print-perfect A4 sheet to print or save.
+6. 7-Day Performance Insights: Slide out the insights bar to see your priority completion rates, average daily hydration logs, and dominant energy levels compiled over the last 7 days of logs.
+7. Elegant Premium UI: No ugly default system alert popups! All notifications, reset confirmations, and settings are handled via custom, gorgeous glassmorphic modals.
+8. Dynamic Locale Support: Date headers automatically format based on your native browser's locale settings.
 
----
+📦 WHAT'S INCLUDED IN YOUR DOWNLOAD:
+* Focus Flow Web Companion App: Clean HTML, CSS, and JS files, complete with Service Worker (sw.js) for full offline caching and manifest.json for app installation.
+* A4 Printable Daily Planner PDF: Minimalist, clean grid layout.
+* A4 Fillable Daily Planner PDF: Digitally fillable on iPad, Android tablets, or computer.
+* Mini Usage Guide PDF: Expert advice on morning clarity, priorities, and daily reflection.
+* Bonus Quote Sheet & Thank You Card.
+* Step-by-Step Setup & Branding Guide: Instructions to customize the colors, logos, and publish it to a free link (like GitHub Pages).
 
-### 📦 WHAT'S INCLUDED IN YOUR DOWNLOAD:
-*   **Interactive Web Companion App**: Clean HTML, CSS, and JS files. Just double-click to launch in Chrome, Safari, Edge, or Firefox.
-*   **A4 Printable Daily Planner PDF**: Minimalist, clean grid layout.
-*   **A4 Fillable Daily Planner PDF**: Digitally fillable on iPad, tablets, or computer.
-*   **Mini Usage Guide PDF**: Expert advice on morning clarity, priorities, and reflection.
-*   **Bonus Quote Sheet & Thank You Card**.
-*   **Setup & Customization Guide**: Step-by-step instructions to change the colors, logo, and deploy it to a free link (like GitHub Pages).
-
----
-
-### 🔑 HOW IT WORKS:
+🔑 HOW IT WORKS:
 1. Purchase & download the zip bundle.
 2. Unzip the file on your device.
 3. Use the PDFs on your favorite tablet annotation app (GoodNotes, Notability) or print them.
-4. Open the `focus-flow-web-app` folder and double-click `index.html` to launch your interactive daily dashboard!
+4. Open the focus-flow-web-app folder and double-click index.html to launch your interactive daily dashboard locally, or click "Install" to add it to your device!
+```
 
 ---
 
 ## 🔍 SEO Search Tags
-Minimalist Planner, Daily To Do List, Time Blocking PDF, Pomodoro Timer App, Printable Daily Planner, Fillable Daily PDF, Productivity Tracker, iPad Planner, Focus Flow Sheet, GoodNotes Template, Web Companion App, Self Care Log, Hydration Tracker
+```text
+Minimalist Planner, Daily To Do List, Time Blocking PDF, Pomodoro Timer App, Printable Daily Planner, Fillable Daily PDF, Productivity Tracker, iPad Planner, Focus Flow Sheet, GoodNotes Template, Web Companion App, Offline PWA Planner, Self Care Log, Hydration Tracker, Aesthetic Dashboard
+```
